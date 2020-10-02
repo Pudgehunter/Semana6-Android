@@ -55,16 +55,6 @@ public class MainActivity extends AppCompatActivity {
                     User obj = new User(user,password,description);
                     String json = gson.toJson(obj);
                     sendUser(json);
-
-                  //  if(line.equals("cambio de pantalla")){
-                    //    Intent a = new Intent(this,Bienvenido.class);
-                   //     startActivity(a);
-                   // }
-                  //  if(line.equals("Fail")){
-                  //      Toast.makeText(this, "No existe", Toast.LENGTH_SHORT).show();
-                  //  }
-
-
                 }
         );
 
@@ -93,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
                             line = reader.readLine();
                             System.out.println("Recibido");
                             //Validación de si tienen el mismo usuario o contraseña.
+                            if(line != null) {
+                                runOnUiThread(() -> {
+                                    if (line.equals("cambio de pantalla")) {
+                                        Intent a = new Intent(this, Bienvenido.class);
+                                        startActivity(a);
+                                    }
+                                    if (line.equals("Fail")) {
+                                        Toast.makeText(this, "No existe", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         }
                     }  catch (UnknownHostException e) {
                         // TODO Auto-generated catch block
